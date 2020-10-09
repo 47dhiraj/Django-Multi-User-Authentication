@@ -1,0 +1,48 @@
+{% load static %}	
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{% static '/fonts.css' %}" rel="stylesheet">
+<link href="{% static '/animate.css' %}" rel="stylesheet">
+<title>Sign-In Form</title>
+<link rel="stylesheet" href="{% static '/bootstrap-3.4.1-dist/css/bootstrap.min.css' %} ">
+<link rel="stylesheet" href="{% static '/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css' %} ">
+<script src="{% static '/jquery.min.js' %}"></script>
+<script src="{% static '/bootstrap-3.4.1-dist/js/bootstrap.min.js' %} "></script> 
+
+</head>
+<body>
+
+    <b> Hello, {{request.user}} </b>
+
+    </br>
+    </br> 
+
+    
+
+<a class="btn btn-primary btn-lg btn-block" href="/admin" role="button">Admin Panel</a>
+</br>
+</br>
+{% if messages %}
+
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {% for message in messages %}	<!-- messages vannale djago ma vayeko messages haru vanni bujinxa -->
+    <p id="messages">{{message}}</p>	<!-- id="messages"  styling chai mathi diyeko xa -->
+    {% endfor %}
+    </div>
+
+{% endif %}
+
+<a class="btn btn-primary btn-lg btn-block" href="{% url 'adminregister'  %}" role="button">Add New Admin</a>
+</br>
+<span ><a href="{% url 'logoutall' %}">Logout</a></span>
+
+
+
+</body>
+</html>

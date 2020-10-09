@@ -1,0 +1,263 @@
+{% load static %}	
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{% static '/fonts.css' %}" rel="stylesheet">
+<link href="{% static '/animate.css' %}" rel="stylesheet">
+<title>Sign-Up Form</title>
+<link rel="stylesheet" href="{% static '/bootstrap-3.4.1-dist/css/bootstrap.min.css' %} ">
+<link rel="stylesheet" href="{% static '/bootstrap-3.4.1-dist/css/bootstrap-theme.min.css' %} ">
+<script src="{% static '/jquery.min.js' %}"></script>
+<script src="{% static '/bootstrap-3.4.1-dist/js/bootstrap.min.js' %} "></script>  
+
+
+
+
+<style type="text/css">
+	body{
+		color: #fff;
+		background: #2f2f2f;
+		font-family: 'Roboto', sans-serif;
+	}
+    .form-control {
+    height: 40px;
+    box-shadow: none;
+    color: #969fa4;
+    padding: 6px 115px 6px 6px;
+	}
+
+	.form-control:focus{
+		border-color: #5cb85c;
+	}
+    .form-control, .btn{        
+        border-radius: 3px;
+    }
+	.signup-form{
+		width: 400px;
+		margin: 30px auto;
+		padding: 30px 0;
+	}
+	.signup-form h2{
+		color: #000000;
+        margin: 0 0 15px;
+		position: relative;
+		text-align: center;
+    }
+	.signup-form h2:before, .signup-form h2:after{
+		content: "";
+		height: 2px;
+		width: 30%;
+		background: #d4d4d4;
+		position: absolute;
+		top: 50%;
+		z-index: 2;
+	}	
+	.signup-form h2:before{
+		left: 0;
+	}
+	.signup-form h2:after{
+		right: 0;
+	}
+    .signup-form .hint-text{
+		color: #999;
+		margin-bottom: 30px;
+		text-align: center;
+	}
+    .signup-form form{
+		color: #000000;
+		border-radius: 3px;
+    	margin-bottom: 15px;
+        background: #f2f3f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+	}
+	/* This is addedto style in order to remove the by default label that was provided by django */
+	.signup-form form label{
+		display: none;
+	}
+	/* This is addedto style in order to customize django error message that was provided by django */
+	.signup-form form p {
+		margin: 14px 0px -60px 6px;
+		color: rgb(245, 90, 90);
+		font-size: small;
+	}
+
+	.signup-form .form-group{
+		margin-bottom: 20px;
+	}
+	.signup-form input[type="checkbox"]{
+		margin-top: 3px;
+	}
+	.signup-form .btn{        
+        font-size: 16px;
+        font-weight: bold;		
+		min-width: 140px;
+        outline: none !important;
+		margin-top: 54px;
+    }
+	.signup-form .row div:first-child{
+		padding-right: 10px;
+	}
+	.signup-form .row div:last-child{
+		padding-left: 10px;
+	}    	
+    .signup-form a{
+		color: #fff;
+		text-decoration: underline;
+	}
+    .signup-form a:hover{
+		text-decoration: none;
+	}
+	.signup-form form a{
+		color: #5cb85c;
+		text-decoration: none;
+	}	
+	.signup-form form a:hover{
+		text-decoration: underline;
+	}  
+
+	/* Center the image and position the close button */
+	.imgcontainer {
+	text-align: center;
+	margin: 5px 0 12px 0;
+	position: relative;
+	}
+
+	img.avatar {
+	width: 30%;
+	border-radius: 40%;
+	}
+
+	#hint_id_password1{  		/* Inorder to remove the django created help_text*/
+		display: none;
+	}
+	#hint_id_password2{			/* Inorder to remove the django created help_text*/
+		display: none;
+	}
+	.asteriskField{				/* Inorder to remove the django created '*' from Username, password1 and password2 label */
+		display: none;
+	}
+	.input-group {
+ 		 position: relative;
+  		padding-left: 50px;
+	}
+	.input-group-addon {
+  		position: absolute;
+  		padding: 12px 12px;
+  		top: 50%;
+  		left: 0;
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		width: 50px !important;
+		height: 40px;
+		display: block;
+}
+
+#error_1_id_password2 {
+    padding-top: 36px;
+    margin-top: 12px;
+}
+#error_2_id_password2 {
+    padding-top: 44px;
+    margin-top: 24px;
+}
+#id_email
+{
+	padding: 6px 60px;
+}
+#id_username
+{
+	padding: 6px 60px;
+}
+
+#id_password1
+{	
+	padding: 6px 60px;
+}
+#id_password2
+{	
+	padding: 6px 60px;
+}
+</style>
+</head>
+<body>
+
+<div class="fadeInDown">
+	<div class="signup-form">
+		
+		<form action="" method="post">
+		
+				
+			{% csrf_token %}
+			<h2>Register</h2>
+			<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+
+			<div class="imgcontainer">
+			<img src="{% static 'images/img_avatar.png' %}" alt="Avatar" class="avatar">
+			</div>
+
+			<div id="div_id_username" class="form-group">		
+				<div class="input-group"> 
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					{{ form.username|as_crispy_field }}
+				</div> 
+			</div>
+		
+
+			<div id="div_id_email" class="form-group">
+			<div class="input-group">
+				<span class="input-group-addon" ><i class="glyphicon glyphicon-envelope"></i></span>
+				{{ form.email|as_crispy_field }}
+				</div> 
+			</div>
+
+			<div id="div_id_password1" class="form-group">
+				<div class="input-group"> 
+					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+					{{ form.password1|as_crispy_field }}
+				</div> 
+			</div>
+
+			<div id="div_id_password2" class="form-group"> 
+				<div class="input-group"> 
+					<span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span>
+					{{ form.password2|as_crispy_field }}
+				 </div> 
+			</div>		
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-success btn-lg btn-block">REGISTER</button>
+			</div>
+		
+		</form>
+		<div class="text-center"><b> Already have an account ? </b><a href="/"><b> Login </b></a></div>
+		
+	</div>
+
+</div>
+
+<script>
+/* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+//We start indexing at one because CSRF_token is considered and input field 
+*/
+
+//Query All input fields
+var form_fields = document.getElementsByTagName('input')
+form_fields[1].placeholder='Username..';
+form_fields[2].placeholder='Email..';
+form_fields[3].placeholder='Enter password...';
+form_fields[4].placeholder='Re-enter Password...';
+
+
+for (var field in form_fields){	
+form_fields[field].className += ' form-control'
+}
+</script>
+</body>
+</html>
